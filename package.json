@@ -5,28 +5,28 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsc",
-        "prepare": "npm run build"
+      "build": "tsc --build tsconfig.json",
+      "prepare": "npm run build"
     },
     "devDependencies": {
-        "typescript": "^5.3.2"
+      "typescript": "^5.3.2"
     },
     "files": [
-        "dist"
+      "dist"
     ],
     "keywords": [
-        "feedback",
-        "popup",
-        "form",
-        "organization"
+      "feedback",
+      "popup",
+      "form",
+      "organization"
     ],
     "author": "Prodio",
     "license": "MIT",
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Prodio-App-Packages/prodio_feedback.git"
+      "type": "git",
+      "url": "git+https://github.com/Prodio-App-Packages/prodio_feedback.git"
     },
     "publishConfig": {
-        "access": "public"
+      "access": "public"
     }
-}
+  }
