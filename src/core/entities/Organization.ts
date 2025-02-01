@@ -4,6 +4,6 @@ export interface Organization {
     title: string;
     description?: string;
     metadata? :any;
-    allowed_url?: string[];
+    allowed_url: string[];
   }
   

@@ -2,6 +2,7 @@ import { Organization } from "./core/entities/Organization";
 import { PropertiesType } from "./core/entities/Properties";
 import { saveToSessionStorage, getFromSessionStorage, getFromLocalStorage } from "./core/repositories/Storage";
 import { fetchOrganizationData } from "./core/usecases/fetchOrganizationData";
+import { getMatchedUrlItem } from "./core/usecases/getMatchedUrlItem";
 import { showPopup } from "./ui/popup";
 
 
@@ -59,7 +60,6 @@ export async function init({ organizationId,properties }: { organizationId: stri
  * Checks if the current page URL is allowed and triggers the popup if applicable.
  */
 function checkAndShowPopup(): void {
-  // const currentPath = window.location.pathname; // Get current path like "/login", "/", "/about"
   const currentPath = window.location.href; // Get full URL including hostname, e.g., "https://example.com/login"
 
   const orgData = getFromSessionStorage(SessionStorageName);
@@ -67,27 +67,19 @@ function checkAndShowPopup(): void {
   if (!orgData) return;
 
   // Check if any allowed URL matches the current path
-  const matchedOrg = (orgData.orgData ?? []).find((org:any) =>
-    org.allowed_url?.includes(currentPath)
-  );
+const result = orgData.orgData ?? []
+  const matchedOrg = getMatchedUrlItem(currentPath,result)
 
   if (matchedOrg) {
 
     const { id, metadata } = matchedOrg
-    // const { frequency } = metadata
-
-
-    // const data = getFromLocalStorage(localStorageName)
-
+    
     const forms = orgData?.submittedForms ?? []
-//  || (forms.includes(id) && frequency === frequencyTypes.everyTime )
     if(!forms.includes(id)){
       showPopup(matchedOrg);
     }else {
       console.log("Popup already submitted and frequency check not met.");
     }
-
-    // showPopup(matchedOrg);
   } else {
     console.log("No matching allowed URLs found for this page.");
   }

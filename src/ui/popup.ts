@@ -52,7 +52,7 @@ export function showPopup(matchedOrg: any): void {
   popup.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)'
   const renderWhiteLabel = () => {
     if(!whiteLabel) {
-      return `<span style="font-size:9px;color:#39C3EF;text-align:right;">Powered by Prodio</span>`
+      return `<a style="font-size:9px;color:#39C3EF;text-align:right;text-decoration:none;" href="https://prodio.app" target="_blank">Powered by Prodio</a>`
     } else {
       return `<span style="display:none;"></span>`
     }
